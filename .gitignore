@@ -1,0 +1,5 @@
+/desktop/build/
+/desktop/dist/*.exe
+/runs/
+/.venv/
+__pycache__/
