@@ -1,5 +1,10 @@
 # 입자 스펙트럼 기반 재료 분류
 
+**소스코드**
+
+- 모델 학습 및 앙상블 생성 · [training/material_classifier_v3.py](training/material_classifier_v3.py)
+- 스펙트럼 예측 GUI · [desktop/wafer.py](desktop/wafer.py)
+
 266.0–1000.0 nm 구간의 스펙트럼을 입력받아 입자의 재료를 **Al, Cu, Si₃N₄, SiO₂, W** 중 하나로 분류한다. 1차원 합성곱 신경망(CNN)과 다층 퍼셉트론(MLP)이 출력한 클래스 확률을 산술평균해 최종 재료를 결정한다. 저장소에는 학습 코드, 학습·평가 데이터, 학습된 모델, Excel 파일을 행 단위로 분석하는 데스크톱 프로그램이 들어 있다.
 
 ## 저장소 구성
