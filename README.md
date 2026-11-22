@@ -6,8 +6,7 @@
 
 | 경로 | 내용 |
 | --- | --- |
-| [training/](training/) | CNN과 MLP를 학습하고 앙상블을 저장하는 스크립트 |
-| [data/training/](data/training/) | 학습 및 내부 검증에 사용하는 스펙트럼 |
+| [training/](training/) | 학습 스크립트와 학습·내부 검증에 사용하는 스펙트럼 |
 | [data/evaluation/](data/evaluation/) | 별도의 평가용 스펙트럼과 강도 변환본 |
 | [data/examples/](data/examples/) | GUI에서 한 행의 예측을 확인할 수 있는 예제 |
 | [models/research/](models/research/) | 연구용 앙상블, 개별 CNN·MLP, 표준화기, 레이블 인코더 |
@@ -47,7 +46,7 @@ GUI는 스크립트 폴더를 먼저 확인하고 현재 작업 폴더에서도 
 
 | 파일 | 데이터 행 | 용도 |
 | --- | ---: | --- |
-| [particle_dataset_all_materials.xlsx](data/training/particle_dataset_all_materials.xlsx) | 4,220 | 재료당 844개. 학습 스크립트가 형상과 크기 조건으로 선별한 뒤 학습·검증 분할 |
+| [particle_dataset_all_materials.xlsx](training/particle_dataset_all_materials.xlsx) | 4,220 | 재료당 844개. 학습 스크립트가 형상과 크기 조건으로 선별한 뒤 학습·검증 분할 |
 | [particle_testset_all_materials.xlsx](data/evaluation/particle_testset_all_materials.xlsx) | 290 | 재료당 58개. 학습 스크립트와 별도로 예측 결과를 확인하는 데이터 |
 | [scaled/](data/evaluation/scaled/)의 파일 6개 | 각 290 | 강도 배율 조건 5종(×2, ×0.5, ×10, ×0.1, ×100)과 최댓값 정규화 조건(`div_max`) |
 | [Test_spectrum_변환.xlsx](data/examples/Test_spectrum_변환.xlsx) | 1 | GUI 입력 예제 |
@@ -64,15 +63,13 @@ Excel과 GUI에서 질화규소와 이산화규소의 레이블은 각각 `Si3N4
 
 ### 재학습 실행
 
-학습 스크립트는 현재 작업 폴더에서 고정된 이름의 Excel 파일을 읽고 같은 폴더에 결과를 쓴다. 다음은 저장소 루트에서 새 실행 폴더를 만드는 예다(Bash). 다른 실험을 보존하려면 실행마다 새 폴더명을 사용한다.
+학습 스크립트는 현재 작업 폴더에서 `particle_dataset_all_materials.xlsx`를 읽는다. 저장소 루트에서 스크립트와 데이터가 함께 있는 `training/`으로 이동한 뒤 실행한다.
 
 ```sh
-mkdir -p runs
-mkdir runs/experiment-01 && cd runs/experiment-01 || exit 1
-cp ../../data/training/particle_dataset_all_materials.xlsx .
-python ../../training/material_classifier_v3.py
+cd training
+python material_classifier_v3.py
 ```
 
-완료되면 실행 폴더에 `cnn.keras`, `mlp.keras`, `model.keras`, `scaler.pkl`, `label_encoder.pkl`이 생성된다. 제공된 개별 모델의 파일명은 `model_cnn.keras`와 `model_mlp.keras`다. 재학습한 앙상블을 확인하려면 해당 실행 폴더에서 `python ../../desktop/wafer.py`를 실행한다.
+학습 결과는 `training/`에 `cnn.keras`, `mlp.keras`, `model.keras`, `scaler.pkl`, `label_encoder.pkl`로 저장된다. 다시 실행하면 같은 이름의 결과를 덮어쓴다. 재학습한 앙상블로 예측하려면 같은 폴더에서 `python ../desktop/wafer.py`를 실행한다.
 
 학습 코드는 NumPy 난수 생성기와 TensorFlow 시드를 0으로 설정한다. 학습 중 출력되는 정확도는 내부 검증 분할의 지표이며, 별도 평가 파일의 정확도는 스크립트가 자동으로 계산하지 않는다.

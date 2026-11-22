@@ -3,3 +3,5 @@
 /runs/
 /.venv/
 __pycache__/
+/training/*.keras
+/training/*.pkl
