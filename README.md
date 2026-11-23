@@ -54,7 +54,6 @@ GUI는 스크립트 폴더를 먼저 확인하고 현재 작업 폴더에서도 
 | [particle_dataset_all_materials.xlsx](training/particle_dataset_all_materials.xlsx) | 4,220 | 재료당 844개. 학습 스크립트가 형상과 크기 조건으로 선별한 뒤 학습·검증 분할 |
 | [particle_testset_all_materials.xlsx](data/evaluation/particle_testset_all_materials.xlsx) | 290 | 재료당 58개. 학습 스크립트와 별도로 예측 결과를 확인하는 데이터 |
 | [scaled/](data/evaluation/scaled/)의 파일 6개 | 각 290 | 강도 배율 조건 5종(×2, ×0.5, ×10, ×0.1, ×100)과 최댓값 정규화 조건(`div_max`) |
-| [Test_spectrum_변환.xlsx](data/examples/Test_spectrum_변환.xlsx) | 1 | GUI 입력 예제 |
 
 Excel과 GUI에서 질화규소와 이산화규소의 레이블은 각각 `Si3N4`, `SiO2`로 표기된다.
 
