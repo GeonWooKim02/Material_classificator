@@ -1,7 +1,15 @@
-/desktop/build/
-/desktop/dist/*.exe
-/runs/
-/.venv/
+# Large packaged executable (exceeds GitHub 100 MB file size limit)
+GUI/MaterialAnalysis.exe
+
+# Python cache & environments
 __pycache__/
-/training/*.keras
-/training/*.pkl
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Excel & OS temporary files
+~$*.xlsx
+.DS_Store
+Thumbs.db
+desktop.ini

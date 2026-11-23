@@ -27,6 +27,7 @@
 
 ```text
 material_classifier/
+├── .gitignore                                  # 대용량 실행 파일(MaterialAnalysis.exe) 및 임시 파일 제외 설정
 ├── README.md                                   # 프로젝트 종합 문서
 ├── deep_learning/                              # 딥러닝 모델 학습 코드, 학습 데이터 및 학습 산출물
 │   ├── material_classifier_v3.py               # 전처리, 데이터 증강, 1D-CNN+MLP 앙상블 학습 스크립트
@@ -35,8 +36,8 @@ material_classifier/
 │       ├── model.keras                         # 학습된 1D-CNN + MLP 앙상블 모델 (Keras 3)
 │       ├── scaler.pkl                          # 500차원 파장 특징 표준화 스케일러 (StandardScaler)
 │       └── label_encoder.pkl                   # 5종 물질 클래스 라벨 인코더 (LabelEncoder)
-├── GUI/                                        # 최종 사용자용 GUI 실행 파일 및 외부 참조 모델 파일
-│   ├── MaterialAnalysis.exe                    # CustomTkinter 기반 일괄 분석 Windows 실행 파일 (PyInstaller)
+├── GUI/                                        # 최종 사용자용 GUI 추론 모델 및 실행 파일 배치 폴더
+│   ├── MaterialAnalysis.exe                    # CustomTkinter 기반 Windows 실행 파일 (약 435 MB — .gitignore 제외)
 │   ├── model.keras                             # GUI 추론용 앙상블 모델 (deep_learning/models/와 동일)
 │   ├── scaler.pkl                              # GUI 추론용 표준화 스케일러
 │   └── label_encoder.pkl                       # GUI 추론용 클래스 라벨 인코더
@@ -132,7 +133,7 @@ flowchart LR
 
 1. **`GUI/` 폴더 구성 확인**
    `GUI/` 폴더 안에 아래 4개 파일이 함께 위치해 있는지 확인합니다.
-   - `MaterialAnalysis.exe`
+   - `MaterialAnalysis.exe` *(약 435 MB 용량으로 인해 GitHub 일반 저장소에는 `.gitignore`로 제외되어 있으므로 별도 배포본을 `GUI/` 폴더에 배치)*
    - `model.keras`
    - `scaler.pkl`
    - `label_encoder.pkl`
